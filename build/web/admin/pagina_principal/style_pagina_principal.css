@@ -1,0 +1,88 @@
+
+body {
+    font-family: Helvetica world;
+    background-color: rgba(226, 217, 196, 0.70);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: left;
+    padding: 10px;
+    background-color: rgba(226, 217, 196, 0.10);
+}
+
+header h1 {
+    color: #000000;
+    margin: 0;
+}
+
+.container {
+    background-color: #E2D9C4;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 750px;
+    margin: 26px auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Puedes reducir la cantidad de columnas */
+    gap: 10px; /* Espacio entre los cuadros */
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+     justify-items: center;
+}
+.grid1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Puedes reducir la cantidad de columnas */
+    gap: 10px;
+ }
+ 
+.grid-item {
+    background-color: #D7C6A1;
+    border: none;
+    border-radius: 5px;
+    padding: 10px; /* Reducir el padding */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 1 / 1; /* Mantiene la relación de aspecto cuadrada */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Opcional: puede agregar un tamaño máximo o mínimo */
+    max-width: 120px; /* Máximo tamaño del cuadro */
+    max-height: 120px; /* Máximo tamaño del cuadro */
+}
+
+
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.grid-item i {
+    font-size: 40px;
+    color: #000000;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.grid-item span {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+}
+.no-outline {
+    text-decoration: none;
+    outline: none;
+}
+
+.no-outline:focus {
+    outline: none; /* Evita el borde azul al hacer clic */
+}

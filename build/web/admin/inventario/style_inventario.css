@@ -1,0 +1,94 @@
+/* Estilo general del cuerpo del documento */
+body {
+    background-color: #E2D9C4; /* Fondo claro */
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para el menú hamburguesa */
+.menu-hamburguesa {
+    position: absolute; /* Para posicionar el ícono en la esquina */
+    top: 15px; /* Separación del borde superior */
+    left: 15px; /* Separación del borde izquierdo */
+    z-index: 1000; /* Asegura que esté siempre visible */
+}
+
+/* Botón del menú */
+.menu-btn {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin bordes */
+    width: 50px;
+    height: 50px;
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/* Estilo del ícono de menú hamburguesa */
+.menu-btn i {
+    font-size: 50px; /* Tamaño del ícono */
+    color: #000000; /* Color negro */
+}
+
+/* Hover sobre el ícono */
+.menu-btn:hover i {
+    color: #7b5b65; /* Cambia a un tono marrón suave al pasar el mouse */
+}
+
+
+/* Contenedor principal */
+.inventario-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: #d7c6a1; /* Fondo beige */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; /* Negro */
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+.table-selection {
+    background-color: #bca77a; /* Fondo dorado */
+    color: #000; /* Títulos en negro */
+}
+
+.table tbody tr {
+    color: #000; /* Texto negro en las filas */
+}
+
+.table-danger {
+    border: 2px solid red !important; /* Borde rojo para alerta */
+    color: #000; /* Texto negro para el contenido */
+}
+
+/* Tarjetas */
+.card {
+    background-color: #d7c6a1; /* Fondo beige */
+    border: none;
+    border-radius: 0.75rem;
+}
+
+/* Campos de texto */
+.input-dark {
+    background-color: #B5A583; /* Marrón oscuro */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+}
+
+/* Botón personalizado */
+.btn-primary-custom {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary-custom:hover {
+    background-color: #7b5b65;
+    color: #ffffff;
+}

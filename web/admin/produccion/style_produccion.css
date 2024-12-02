@@ -1,0 +1,130 @@
+/* Estilo general del cuerpo del documento */
+body {
+    background-color: #E2D9C4; /* Fondo claro */
+    font-family: Arial, sans-serif;
+}
+
+/* Menú hamburguesa */
+/* Botón del menú */
+.menu-btn {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin bordes */
+    width: 50px;
+    height: 50px;
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+/* Estilo del ícono de menú hamburguesa */
+.menu-btn i {
+    font-size: 50px; /* Tamaño del ícono */
+    color: #000000; /* Color negro */
+}
+
+/* Hover sobre el ícono */
+.menu-btn:hover i {
+    color: #7b5b65; /* Cambia a un tono marrón suave al pasar el mouse */
+}
+
+/* Contenedor principal */
+.produccion-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: #d7c6a1; /* Fondo beige */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; /* Negro */
+    margin-bottom: 20px;
+}
+
+/* Formulario superior */
+.formulario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+/* Campos de texto */
+.input-dark {
+    background-color: #B5A583; /* Marrón oscuro */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+}
+
+.btn-primary-custom {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-primary-custom:hover {
+    background-color: #7b5b65;
+}
+
+/* Tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #BCA77A; /* Fondo dorado */
+    color: #000; /* Negro */
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    border:1px solid #ffffff;
+}
+
+.table td {
+    background-color: #D7C6A1;
+    padding: 10px;
+    color: #000;
+    border: 1px solid #ffffff;
+}
+
+.table tbody tr:hover {
+    background-color: #f0e6d2;
+}
+
+/* Acciones en la tabla */
+.table-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-actions button {
+    background-color: #d7c6a1;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Tarjetas */
+.card {
+    background-color: #d7c6a1; /* Fondo beige */
+    border: none;
+    border-radius: 0.75rem;
+}
+
+.btn-primary-custom:hover {
+    background-color: #7b5b65;
+    color: #ffffff;
+}
