@@ -1,8 +1,3 @@
-/* Fondo general de la página */
-body {
-    background-color: #E2D9C4; /* Fondo claro */
-    font-family: Arial, sans-serif;
-}
 
 /* Menú hamburguesa */
 /* Botón del menú */
@@ -27,7 +22,7 @@ body {
 
 /* Contenedor principal */
 .main-container {
-    background-color: #f5e9db;
+    background-color: #E2D9C4;
 }
 
 /* Encabezado */
@@ -107,24 +102,13 @@ h1 {
 
 /* Fondo general */
 body {
-    background-color: #f5e9db;
+    background-color: #E2D9C4;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Encabezado */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
-h1 {
-    font-size: 2rem;
-    color: #000;
-    margin: 0;
-}
 
 .menu-button {
     border: none;

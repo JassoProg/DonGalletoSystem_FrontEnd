@@ -1,7 +1,7 @@
 
 body {
     font-family: Helvetica world;
-    background-color: rgba(226, 217, 196, 0.70);
+    background-color: #E2D9C4;
     margin: 0;
     padding: 0;
 }
@@ -18,7 +18,7 @@ header h1 {
 }
 
 .container {
-    background-color: #E2D9C4;
+    background-color: #DCCFB2;
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);

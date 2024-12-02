@@ -33,7 +33,7 @@ body {
 .ventas-container {
     max-width: 1200px;
     margin: 40px auto;
-    background-color: #D7C6A1;
+    background-color: #DCCFB2;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,7 @@ body {
     font-size: 48px;
     font-weight: bold;
     text-align: center;
-    color: #3A3A3A;
+    color: #000000;
     margin-bottom: 20px;
 }
 .btn-primary-custom {
@@ -52,7 +52,7 @@ body {
 }
 
 .btn-primary-custom:hover {
-    background-color: #7B5B65;
+    background-color: #535353;
     color: #FFFFFF;
 }
 .table th, .table td {
@@ -72,6 +72,7 @@ body {
     font-weight: bold;
     display: block;
 }
+
 .custom-section div {
     background-color: #BCA77A;
     padding: 5px;
@@ -80,20 +81,4 @@ body {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-top: 5px;
-}
-.custom-section .arrows {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 15px;
-}
-.custom-section .arrows button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 40px;
-    color: #3A3A3A;
-}
-.custom-section .arrows button:hover {
-    color: #7B5B65;
 }

@@ -1,9 +1,92 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 26 nov 2024, 6:36:37 p.m.
-    Author     : rayre
-*/
+ body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-image: url(../../media/img/fondo_index.jpeg);
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
 
+            .container {
+                display: flex;
+                align-items: center;
+                background-color: #D7C6A1; /* Fondo beige */
+                border-radius: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                width: 500px; /* Ancho total compacto */
+                height: 400px;
+                max-width: 120%;
+                padding: 10px; /* Espaciado interno */
+            }
+
+            .image-container {
+                width: 400px; /* Tamaño compacto */
+                height: 400px;
+                background-image: url(../../media/img/img_galleta.jpeg); /* Imagen de galleta */
+                background-size: cover;
+                background-position: center;
+                border-radius: 50%; /* Circular */
+                margin-right: 10px; /* Espacio reducido entre imagen y formulario */
+            }
+
+            .form-container {
+                flex: 1; /* Ocupa el resto del espacio */
+                padding: 5px; /* Espaciado interno */
+            }
+
+            .form-container h2 {
+                margin-bottom: 10px; /* Espaciado más pequeño */
+                font-size: 40px; /* Tamaño ajustado */
+                color: #3e2f23; /* Marrón oscuro */
+                text-align: left; /* Alineación a la izquierda */
+            }
+
+            .form-container input {
+                width: 95%;
+                padding: 12px; /* Más alto */
+                margin: 8px 0; /* Espaciado reducido */
+                border: none;
+                border-radius: 20px;
+                background-color: #c4a381; /* Beige claro */
+                font-size: 14px; /* Texto más grande */
+                color: #3e2f23;
+            }
+
+            .form-container input::placeholder {
+                font-size: 14px; /* Tamaño del texto */
+                color: #3e2f23; /* Mismo color que los inputs */
+            }
+
+            .form-container button {
+                width: 100%;
+                padding: 14px; /* Tamaño ajustado */
+                background-color: #1A1E1A; /* Marrón oscuro */
+                color: white;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                font-size: 16px; /* Más grande */
+                margin-top: 10px;
+            }
+
+            /* Hover de boton de login*/
+            .form-container button:hover {
+                background-color: #535353;
+            }
+
+
+            .form-container a {
+                display: block;
+                margin-top: 10px;
+                font-size: 12px; /* Texto más pequeño */
+                color: #BCA77A; /* Marrón oscuro */
+                text-decoration: none;
+                text-align: left; /* Alineación izquierda */
+            }
+
+            .form-container a:hover {
+                text-decoration: underline;
+            }
