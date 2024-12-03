@@ -1,5 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/receta/'; 
-const apiProductoUrl = "http://localhost:3000/api/producto/";
+const apiUrl = 'http://localhost:3000/api/receta/';
 
 async function getAllRecetas() {
     try {
@@ -7,21 +6,18 @@ async function getAllRecetas() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer <tu-token>', 
+                'Authorization': 'Bearer <tu-token>',
             }
         });
-
-        console.log('Respuesta completa:', response);
 
         if (!response.ok) {
             throw new Error(`Error HTTP! Status: ${response.status}`);
         }
 
         const responseData = await response.json();
-        console.log('Datos recibidos:', responseData);
 
         if (Array.isArray(responseData.data)) {
-            actualizarTablaRecetas(responseData.data); 
+            actualizarTablaRecetas(responseData.data);
         } else {
             console.error('La clave "data" no contiene un arreglo:', responseData.data);
         }
@@ -30,10 +26,9 @@ async function getAllRecetas() {
     }
 }
 
-
 function actualizarTablaRecetas(data) {
     const tbody = document.querySelector('#tabla_recetas tbody');
-    tbody.innerHTML = ''; 
+    tbody.innerHTML = '';
 
     data.forEach((receta) => {
         const row = document.createElement('tr');
@@ -43,13 +38,15 @@ function actualizarTablaRecetas(data) {
 
         const celdaReceta = document.createElement('td');
         const verRecetaBtn = document.createElement('button');
-        verRecetaBtn.classList.add('view-btn');
+        verRecetaBtn.classList.add('btn', 'btn-primary');
         verRecetaBtn.textContent = 'Ver receta';
+        
+        // Pasamos directamente la descripción como argumento al evento
         verRecetaBtn.addEventListener('click', () => {
-            verReceta(receta.id); 
+            mostrarDescripcion(receta.descripcion);
         });
+        
         celdaReceta.appendChild(verRecetaBtn);
-
 
         row.appendChild(celdaNombre);
         row.appendChild(celdaReceta);
@@ -58,8 +55,15 @@ function actualizarTablaRecetas(data) {
     });
 }
 
+function mostrarDescripcion(descripcion) {
+    // Establece el contenido del modal con la descripción proporcionada
+    document.getElementById('descripcionContenido').textContent = descripcion;
+
+    // Muestra el modal
+    const modal = new bootstrap.Modal(document.getElementById('descripcionModal'));
+    modal.show();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     getAllRecetas();
 });
-
-
