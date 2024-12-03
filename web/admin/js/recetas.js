@@ -1,4 +1,5 @@
 const apiUrl = 'http://localhost:3000/api/receta/'; 
+const apiProductoUrl = "http://localhost:3000/api/producto/";
 
 async function getAllRecetas() {
     try {
@@ -57,11 +58,8 @@ function actualizarTablaRecetas(data) {
     });
 }
 
-function verReceta(id) {
-    console.log(`Ver receta con id: ${id}`);
- 
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     getAllRecetas();
 });
+
+

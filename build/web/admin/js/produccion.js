@@ -158,10 +158,11 @@ function actualizarTablaProduccion(data) {
         const celdaAcciones = document.createElement('td');
         const btnAcciones = document.createElement('button');
         btnAcciones.classList.add('btn', 'btn-outline-dark', 'rounded-circle');
-        btnAcciones.innerHTML = '<i class="bi bi-pencil"></i>'; // Icono de lápiz para editar
+        btnAcciones.innerHTML = '<i class="bi bi-plus"></i>'; // Icono de lápiz para editar
         btnAcciones.addEventListener('click', () => {
             editarRegistro(registro.folio); // Llamar a la función para editar el registro
         });
+        
 
         celdaAcciones.appendChild(btnAcciones);
 

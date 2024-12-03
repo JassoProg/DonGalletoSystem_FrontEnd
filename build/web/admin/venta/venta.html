@@ -26,27 +26,27 @@
                 </div>
                 <div class="col custom-section">
                     <label>Efectivo</label>
-                    <input type="text" value="$0" class="form-control">                 
+                    <input id="efectivo" type="number" placeholder="$0" class="form-control">                 
                 </div>
                 <div class="col custom-section">
                     <label>Galletas Uds.</label>
-                    <input type="text" value="0" class="form-control">                 
+                    <input id="unidades_galletas" type="number" placeholder="0" class="form-control">                 
                 </div>
                 <div class="col custom-section">
                     <label>Peso Kg</label>
-                    <input type="text" value="0 Kg" class="form-control">
+                    <input id="peso_kg" type="number" placeholder="0 Kg" class="form-control">
                 </div>
                 <div class="col custom-section">
                     <label>Peso Gm</label>
-                    <input type="text" value="0 Gm" class="form-control">
+                    <input id="peso_gm" type="number" placeholder="0 Gm" class="form-control">
                 </div>
                 <div class="col custom-section">
                     <label>Peso Total Kg</label>
-                    <input type="text" value="0 Kg" class="form-control">
+                    <input id="peso_total"type="text" placeholder="0 Kg" class="form-control" readonly>
                 </div>
                 <div class="col custom-section">
                     <label>Precio Venta</label>
-                    <input type="text" value="$0.00" class="form-control">
+                    <input id="precio_venta" type="text" placeholder="$0.00" class="form-control" readonly>
                 </div>
             </div>
             <div class="row mb-4">
@@ -55,7 +55,7 @@
                     <button class="btn btn-primary-custom">Agregar galleta</button>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table id="tabla_venta" class="table table-bordered">
                 <thead class="table-selection">
                     <tr>
                         <th>Galleta</th>
@@ -69,15 +69,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Chocolate de chocolate</td>
-                        <td>0</td>
-                        <td>0 Kg</td>
-                        <td>0 Gm</td>
-                        <td>0 Kg</td>
-                        <td>$0.00</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm">&#x1F5D1;</button>
-                        </td>
+                                       
                     </tr>
                 </tbody>
             </table>
@@ -90,7 +82,7 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <h4>Total a cobrar: <span>$0.00</span></h4>
-                    <button class="btn btn-primary-custom">Cobrar</button>
+                    <button id="btnCobrar" onclick=cobrarVenta(); class="btn btn-primary-custom">Cobrar</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/inventario/';
+const apiUrl = 'https://climate-vs-champion-back.trycloudflare.com/api/inventario/';
 
 async function getAll() {
     try {
