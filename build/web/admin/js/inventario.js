@@ -19,7 +19,7 @@ async function getAll() {
         const responseData = await response.json();
         console.log('Datos recibidos:', responseData);
 
-        // Asegúrate de que `responseData.data` es un arreglo antes de continuar
+
         if (Array.isArray(responseData.data)) {
             actualizarTabla(responseData.data); // Pasa el arreglo al actualizarTabla
         } else {
