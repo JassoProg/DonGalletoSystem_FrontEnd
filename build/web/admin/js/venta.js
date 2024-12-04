@@ -1,4 +1,4 @@
-const apiRecetasUrl = 'http://localhost:3000/api/receta/';
+const apiRecetasUrl = 'http://localhost:3000/api/producto/terminado/';
 const apiUrl = "http://localhost:3000/api/detalleventa/";
 
 async function getAllRecetas() {
@@ -47,12 +47,6 @@ function llenarSelectRecetas(recetas) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    getAllRecetas();
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Cargar las recetas al cargar la página
     getAllRecetas();
 
     // Asignar eventos a los botones
@@ -112,18 +106,18 @@ function agregarGalleta() {
     const tabla = document.getElementById('tabla_venta').querySelector('tbody');
     const fila = document.createElement('tr');
 
-// Asegúrate de agregar el `data-receta-id` a la fila
+    // Asegúrate de agregar el `data-receta-id` a la fila
     fila.setAttribute('data-receta-id', recetaId); // Añadir el ID de la receta
 
     fila.innerHTML = `
-    <td>${recetaNombre}</td>
-    <td>${galletasUds}</td>
-    <td>${(pesoTotalKg).toFixed(2)} Kg</td>
-    <td>${(pesoTotalGm % 1000).toFixed(2)} Gm</td>
-    <td>${pesoTotalKg.toFixed(2)} Kg</td>
-    <td>$${precioVenta.toFixed(2)}</td>
-    <td><button class="btn btn-danger btn-sm">&#x1F5D1;</button></td>
-`;
+        <td>${recetaNombre}</td>
+        <td>${galletasUds}</td>
+        <td>${(pesoTotalKg).toFixed(2)} Kg</td>
+        <td>${(pesoTotalGm % 1000).toFixed(2)} Gm</td>
+        <td>${pesoTotalKg.toFixed(2)} Kg</td>
+        <td>$${precioVenta.toFixed(2)}</td>
+        <td><button class="btn btn-danger btn-sm">&#x1F5D1;</button></td>
+    `;
 
     tabla.appendChild(fila);
 
@@ -164,21 +158,6 @@ function actualizarTotales() {
     document.querySelector('.col-md-6.text-end h4 span').textContent = `$${totalPrecio.toFixed(2)}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    getAllRecetas();
-
-    // Asignar eventos a los botones
-    document.querySelector('.btn.btn-primary-custom:nth-child(1)').addEventListener('click', limpiarSeleccion);
-    document.querySelector('.btn.btn-primary-custom:nth-child(2)').addEventListener('click', agregarGalleta);
-
-    // Delegar evento para eliminar filas
-    document.querySelector('#tabla_venta tbody').addEventListener('click', (e) => {
-        if (e.target && e.target.matches('button.btn-danger')) {
-            e.target.closest('tr').remove();
-        }
-    });
-});
-
 async function cobrarVenta() {
     const filas = document.querySelectorAll('#tabla_venta tbody tr');
     if (filas.length === 0) {
@@ -188,18 +167,14 @@ async function cobrarVenta() {
 
     // Crear un arreglo con los datos de las filas de la tabla
     const detallesVenta = Array.from(filas).map(fila => {
-        const recetaNombre = fila.children[0].textContent;
-        //const recetaId = fila.getAttribute('data-receta-id');
-        const recetaId = 1;
-        const cantidad = parseInt(fila.children[1].textContent) || 0;
-        const pesoKg = parseFloat(fila.children[4].textContent.replace(' Kg', '')) || 0;
-        const precio = parseFloat(fila.children[5].textContent.replace('$', '')) || 0;
+        // Verificar que las celdas existen
+        const recetaId = fila.getAttribute('data-receta-id') || '';  // Obtener el ID de la receta
+        const cantidad = parseInt(fila.children[1]?.textContent) || 0;  // Obtener cantidad
+        const precio = parseFloat(fila.children[5]?.textContent.replace('$', '').trim()) || 0;  // Obtener precio
 
         return {
-            receta: recetaNombre,
-            recetaId: recetaId,
+            producto_Id: recetaId,
             cantidad: cantidad,
-            pesoKg: pesoKg,
             precio: precio
         };
     });
@@ -209,30 +184,40 @@ async function cobrarVenta() {
         sucursal: "centro",  // Este valor es por defecto
         estado: "PAGADO",    // Este valor es por defecto
         metodoPago: "EFECTIVO",  // Este valor es por defecto
-        detallesVenta: detallesVenta
     };
 
-    // Realizar la solicitud PUT al backend
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer <tu-token>', // Cambia el token según tu necesidad
-            },
-            body: JSON.stringify(ventaData)
-        });
+    // Agregar cada producto individualmente a la estructura principal y realizar la solicitud
+    for (const detalle of detallesVenta) {
+        const productoData = { 
+            ...ventaData, // Copiar los datos generales de la venta
+            producto_Id: parseInt(detalle.producto_Id), 
+            cantidad: detalle.cantidad,
+            precio: detalle.precio
+        };
 
-        if (!response.ok) {
-            throw new Error(`Error al cobrar la venta. Status: ${response.status}`);
+        // Realizar la solicitud POST por cada producto
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer $`, // Cambiar el token según tu necesidad
+                },
+                body: JSON.stringify(productoData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error al cobrar la venta. Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            alert('Venta cobrada con éxito!');
+            console.log(responseData);
+            // Puedes hacer algo con la respuesta del servidor si es necesario.
+        } catch (error) {
+            console.error('Error al cobrar la venta:', error);
+            alert('Hubo un error al cobrar la venta.');
         }
-
-        const responseData = await response.json();
-        alert('Venta cobrada con éxito!');
-        console.log(responseData);
-        // Puedes hacer algo con la respuesta del servidor si es necesario.
-    } catch (error) {
-        console.error('Error al cobrar la venta:', error);
-        alert('Hubo un error al cobrar la venta.');
     }
 }
+
