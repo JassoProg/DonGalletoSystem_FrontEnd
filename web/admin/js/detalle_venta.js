@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/detalleventa/'; // URL de la API para obtener los detalles de venta
+const apiUrl = 'http://localhost:3000/api/detalleVenta/'; // URL de la API para obtener los detalles de venta
 
 // Función para obtener todos los detalles de venta
 async function getAllDetalleVenta() {

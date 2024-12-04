@@ -77,9 +77,7 @@ function limpiarSeleccion() {
         }
     });
 }
-
 function agregarGalleta() {
-    // Obtener valores de los campos
     const recetaSelect = document.getElementById('receta');
     const recetaNombre = recetaSelect.options[recetaSelect.selectedIndex].text;
     const recetaId = recetaSelect.value;
@@ -89,47 +87,64 @@ function agregarGalleta() {
         return;
     }
 
-    let galletasUds = parseFloat(document.querySelectorAll('.form-control')[1].value) || 0;
-    let pesoKg = parseFloat(document.querySelectorAll('.form-control')[2].value) || 0;
-    let pesoGm = parseFloat(document.querySelectorAll('.form-control')[3].value) || 0;
-
-    // Calcular peso total y ajustar cantidad según peso
-    let pesoTotalGm = pesoKg * 1000 + pesoGm;
-    galletasUds = Math.round(pesoTotalGm / 40); // Cada galleta pesa 40 gm
-    pesoTotalGm = galletasUds * 40; // Reajustar el peso total según la cantidad de galletas
-
-    const pesoTotalKg = pesoTotalGm / 1000;
     const precioPorGalleta = 4.50;
-    const precioVenta = Math.ceil(galletasUds * precioPorGalleta); // Redondeo a favor del cliente
+    let galletasUds = 0;
+    let pesoKg = 0;
+    let pesoGm = 0;
+    let precioVenta = 0;
+
+    // Obtener valores de los campos
+    const efectivo = parseFloat(document.getElementById('efectivo').value) || 0;
+    const unidadesGalletas = parseInt(document.getElementById('unidades_galletas').value) || 0;
+    const pesoInputKg = parseFloat(document.getElementById('peso_kg').value) || 0;
+    const pesoInputGm = parseFloat(document.getElementById('peso_gm').value) || 0;
+
+    if (efectivo > 0) {
+        // Calcular la cantidad de galletas por efectivo
+        galletasUds = Math.floor(efectivo / precioPorGalleta); // Redondear hacia abajo
+        precioVenta = galletasUds * precioPorGalleta;
+    } else if (unidadesGalletas > 0) {
+        // Usar la cantidad de unidades especificadas
+        galletasUds = unidadesGalletas;
+        precioVenta = galletasUds * precioPorGalleta;
+    } else if (pesoInputKg > 0 || pesoInputGm > 0) {
+        // Calcular la cantidad de galletas por peso
+        const pesoTotalGm = (pesoInputKg * 1000) + pesoInputGm;
+        galletasUds = Math.floor(pesoTotalGm / 40); // Cada galleta pesa 40 gm
+        precioVenta = galletasUds * precioPorGalleta;
+        pesoKg = Math.floor(pesoTotalGm / 1000);
+        pesoGm = pesoTotalGm % 1000;
+    } else {
+        alert('Por favor, ingresa efectivo, unidades o peso para agregar galletas.');
+        return;
+    }
+
+    // Si el peso no fue calculado, calcularlo ahora
+    if (pesoKg === 0 && pesoGm === 0) {
+        const pesoTotalGm = galletasUds * 40;
+        pesoKg = Math.floor(pesoTotalGm / 1000);
+        pesoGm = pesoTotalGm % 1000;
+    }
 
     // Crear una nueva fila en la tabla
     const tabla = document.getElementById('tabla_venta').querySelector('tbody');
     const fila = document.createElement('tr');
-
-    // Asegúrate de agregar el `data-receta-id` a la fila
-    fila.setAttribute('data-receta-id', recetaId); // Añadir el ID de la receta
+    fila.setAttribute('data-receta-id', recetaId);
 
     fila.innerHTML = `
         <td>${recetaNombre}</td>
         <td>${galletasUds}</td>
-        <td>${(pesoTotalKg).toFixed(2)} Kg</td>
-        <td>${(pesoTotalGm % 1000).toFixed(2)} Gm</td>
-        <td>${pesoTotalKg.toFixed(2)} Kg</td>
+        <td>${pesoKg.toFixed(2)} Kg</td>
+        <td>${pesoGm.toFixed(2)} Gm</td>
+        <td>${(pesoKg + pesoGm / 1000).toFixed(2)} Kg</td>
         <td>$${precioVenta.toFixed(2)}</td>
         <td><button class="btn btn-danger btn-sm">&#x1F5D1;</button></td>
     `;
 
     tabla.appendChild(fila);
 
-    // Asegurarse de que la fila tiene al menos 6 celdas
-    if (fila.children.length < 6) {
-        console.error('La fila no tiene suficientes celdas. Algo salió mal al agregarla.');
-    }
-
-    // Actualizar totales
+    // Actualizar totales y limpiar los campos
     actualizarTotales();
-
-    // Limpiar campos después de agregar
     limpiarSeleccion();
 }
 
@@ -139,14 +154,9 @@ function actualizarTotales() {
     let totalGalletas = 0;
 
     const filas = document.querySelectorAll('#tabla_venta tbody tr');
-    if (filas.length === 0) {
-        console.log('No hay filas en la tabla.');
-        return;
-    }
-
     filas.forEach(fila => {
-        const galletasUds = parseInt(fila.children[1]?.textContent) || 0;  // Usamos el operador ?. para evitar errores
-        const pesoTotalKg = parseFloat(fila.children[4]?.textContent.replace(' Kg', '')) || 0; // Usamos ? para evitar errores
+        const galletasUds = parseInt(fila.children[1]?.textContent) || 0;
+        const pesoTotalKg = parseFloat(fila.children[4]?.textContent.replace(' Kg', '')) || 0;
         const precioVenta = parseFloat(fila.children[5]?.textContent.replace('$', '')) || 0;
 
         totalGalletas += galletasUds;
@@ -157,6 +167,7 @@ function actualizarTotales() {
     // Actualizar los totales en la UI
     document.querySelector('.col-md-6.text-end h4 span').textContent = `$${totalPrecio.toFixed(2)}`;
 }
+
 
 async function cobrarVenta() {
     const filas = document.querySelectorAll('#tabla_venta tbody tr');
@@ -179,17 +190,9 @@ async function cobrarVenta() {
         };
     });
 
-    // Datos adicionales necesarios para la venta
-    const ventaData = {
-        sucursal: "centro",  // Este valor es por defecto
-        estado: "PAGADO",    // Este valor es por defecto
-        metodoPago: "EFECTIVO",  // Este valor es por defecto
-    };
-
-    // Agregar cada producto individualmente a la estructura principal y realizar la solicitud
+    // Ya no necesitas los datos de sucursal, estado y metodoPago
     for (const detalle of detallesVenta) {
         const productoData = { 
-            ...ventaData, // Copiar los datos generales de la venta
             producto_Id: parseInt(detalle.producto_Id), 
             cantidad: detalle.cantidad,
             precio: detalle.precio
@@ -201,7 +204,7 @@ async function cobrarVenta() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer $`, // Cambiar el token según tu necesidad
+                    'Authorization': `Bearer <tu-token>`, // Cambia el token según tu necesidad
                 },
                 body: JSON.stringify(productoData)
             });
@@ -220,4 +223,3 @@ async function cobrarVenta() {
         }
     }
 }
-
